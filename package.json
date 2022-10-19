@@ -1,0 +1,17 @@
+{
+  "name": "js-dom_manupulations",
+  "version": "1.0.0",
+  "description": "codes for manupulating DOM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-modules ./index.js"
+  },
+  "author": "Akhil Vinayak P",
+  "license": "ISC",
+  "dependencies": {
+    "prompt-sync": "^4.2.0",
+    "puppeteer": "^19.0.0"
+  },
+  "type": "module"
+}
