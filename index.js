@@ -5,9 +5,11 @@ const prompt = PromptSync(({sigint: true}));
 let choise = prompt("Enter the choice (1-20) >> ")
 choise = Number(choise);
 (async () => {
-    const browser = await puppeteer.launch({headless:false});
-    await page.setViewport({ width: 1280, height: 800 });
+    const browser = await puppeteer.launch({headless:false,     args:[
+      '--start-maximized' //  '--start-fullscreen'
+    ]});
     const page = await browser.newPage();
+    await page.setViewport({ width: 1980, height: 800 });
     switch(choise){
       case 0 : await page.goto('https://example.com');
               await page.evaluate(()=>{
@@ -25,7 +27,6 @@ choise = Number(choise);
                 const desc_selector = ".color-base-70 ";
                 let element = document.querySelectorAll(selector);
                 let desc_element = document.querySelectorAll(desc_selector)
-                setTimeout()
                 // target element at index 1
                 element = element[1];
                 desc_element = desc_element[1];
@@ -67,10 +68,86 @@ choise = Number(choise);
                 alert(products);
               })
               break;
-              
+        case 3:
+              /**
+               *   https://support.google.com/youtube/#topic=9257498
+               */
+              await page.goto("https://support.google.com/youtube/#topic=9257498");
+              await page.evaluate(()=>{
+                let faq_parent = document.querySelector(".accordion-homepage");
+                if(!faq_parent){
+                  alert("can not find the element, site may changed..")
+                  return null;
+                }
+                const new_faq = document.createElement("section");
+                new_faq.classList.add("parent");
+                // new_faq.
+                new_faq.innerHTML = '<h3 role="button" tabindex="0" aria-expanded="true" aria-label="new Faq">My New FAQ <svg class="up" viewBox="0 0 24 24"> \
+                <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path> \
+                </svg> <svg class="down" viewBox="0 0 24 24"> \
+                <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"></path> \
+                </svg>\
+                </h3> <div class="overflow"> \
+                      <div class="children" role="list" aria-hidden="true" style="margin-top: -238px; display: none;">\
+                      <div class="child" role="listitem">\
+                      <a class="topic-link" href="https://javascript.info/">JS Fundamentals</a>\
+                      </div>\
+                </div>\
+                </div>';
+                faq_parent.appendChild(new_faq);
+              });
+              break;
+        case 4: 
+              /**
+               * change the contact number.  
+               * https://www.oneplus.in/support/contact
+               */
+              await page.goto("https://www.oneplus.in/support/contact");
+              await page.evaluate(()=>{
+                const contact_element = document.querySelector(".service-number");
+                if(contact_element){
+                contact_element.textContent = "+0000000000";
+                }
+              });
+              break;
+        case 5:
+              await page.goto("https://www.samsung.com/in/youmake/");
+              await page.evaluate(()=>{
+                const buttons = document.querySelectorAll(".diwali-deals-product-sale-btn");
+                if(buttons){
+                  buttons.forEach((element)=>{
+                    element.textContent = "CheckOut NOW!";
+                  });
+                }
+                else alert("can not find the target site may changed!");
+              });
+              break;
+        case 6:
+              /**
+               * change the background color of the search bar on mouseover   site:https://www.adidas.co.in/
+               */
+              await page.goto("https://www.adidas.co.in/");
+              await page.evaluate(()=>{
+                const search_bar = document.querySelector('[data-auto-id="searchinput"]');
+                search_bar.addEventListener("mouseover", (e)=>{
+                  search_bar.setAttribute("style", 'background-color:red;');
+                })
+              });
+              break;
+        case 7: 
+              /**
+               * Search in MDN
+               *   
+               */
+              await page.goto("https://developer.mozilla.org/en-US/");
+              await page.evaluate(()=>{
+                const search_bar = document.getElementById("hp-search-input");
+                const form_element = document.querySelector('[role="search"]');
+                search_bar.value = "events"
+                form_element.submit();
+              })
     }
-  
-    // await browser.close();
+      // await browser.close();
   })();
 
 
