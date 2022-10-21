@@ -200,7 +200,84 @@ choise = Number(choise);
               lg.style.backgroundImage = "url(https://ineuron.ai/images/ineuron-logo.png)";
            });
            break;
-        
+      case 12: 
+              /**
+               * colorchange of the button in https://github.com/login  
+               */
+              await page.goto("https://github.com/login");
+              await page.evaluate(()=>{
+                const button = document.querySelector('[value="Sign in"]');
+                button.setAttribute("style","background-color:blue");
+              });
+              break;
+      case 13:
+              /**
+               * Change the content in https://www.hackerrank.com/  
+               */
+              await page.goto("https://www.hackerrank.com/");
+              await page.evaluate(()=>{
+                const desc = document.querySelector(".fl-heading-text");
+                desc.textContent = "JSBOOTCAMP";
+              });
+              break;
+      case 14:
+              /**
+               * change the font-size
+               * https://www.asus.com/in/  
+               */
+              await page.goto("https://www.asus.com/in/");
+              await page.evaluate(()=>{
+                const deals = document.querySelector(".HotDealsAll__Heading__2fIbe");
+                deals.style.fontSize = "80px";
+              });
+              break;
+      case 15:
+              /**
+               * change the alignment of the titles
+               */
+              await page.goto("https://www.dell.com/en-in/shop/deals/laptop-deals");
+              await page.waitForSelector('.ps-title');
+              await page.evaluate(()=>{
+                const product_title = document.querySelectorAll(".ps-title");
+                product_title.forEach((item)=>{
+                  item.style.textAlign = "right";
+              });
+              });
+              break;
+      case 16:
+              /**
+               *   Change the heading in the vercel
+               */
+              await page.goto("https://vercel.com/");
+              await page.evaluate(()=>{
+                const title_ = document.querySelector(".section-title_title__VEDfK");
+                title_.textContent = "Start with Scratch";
+              });
+              break;
+      case 17:
+              /**  
+               * change the buy button to current date
+               */
+              // getting the current date
+              await page.goto("https://www.sony.co.in/electronics/headband-headphones/wh-1000xm4?cpint=homepage_whats_hot-What%27s%20Hot-en_IN-responsivegrid_structure_top_whtshot_2");
+              await page.evaluate(()=>{
+                const currDate = new Date();
+                const year = currDate.getFullYear();
+                let month = currDate.getMonth();
+                month += 1;
+                let day = currDate.getDate();
+                day = day < 10 ? '0'+ day : day;
+                const date_ = `${day}//${month}//${year}`;
+                const buy_button = document.querySelector('[data-id="buyButton_WH-1000XM4"]');
+                buy_button.textContent = date_;
+              });
+              break;
+        case 18:
+          /**
+           *   
+           */
+
+
     }
       // await browser.close();
   })();
