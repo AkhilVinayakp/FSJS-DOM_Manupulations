@@ -189,6 +189,18 @@ choise = Number(choise);
             });
           });
           break;
+        case 11: 
+        /**  
+         * logo change for realme.com
+         * https://learnyst.s3.amazonaws.com/assets/schools/2410/resources/images/logo_lco_t17sd.png
+         */
+            await page.goto("https://www.realme.com/in/");
+            await page.evaluate(()=>{
+              const lg = document.querySelector(".logo > .icon");
+              lg.style.backgroundImage = "url(https://ineuron.ai/images/ineuron-logo.png)";
+           });
+           break;
+        
     }
       // await browser.close();
   })();
