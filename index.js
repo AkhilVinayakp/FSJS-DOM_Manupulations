@@ -272,12 +272,45 @@ choise = Number(choise);
                 buy_button.textContent = date_;
               });
               break;
-        case 18:
+      case 18:
           /**
-           *   
+           * 
+           *   change the color of the footer.
            */
-
-
+          await page.goto("https://www.philips.co.in/");
+          await page.evaluate(()=>{
+            const footer = document.querySelector(".p-footer");
+            footer.style.backgroundColor = "Orange";
+          });
+          break;
+        
+      case 19:
+          /**
+           *   get the navbar logo
+           */
+          await page.goto("https://in.canon/en/consumer");
+          await page.evaluate(()=>{
+            const navbarlogo = document.querySelector(".navbar-brand > .logo");
+            let logoUrl = navbarlogo.getAttribute("src");
+            logoUrl = 'https://in.canon/'+logoUrl;
+            alert(`logo Url ${logoUrl}`);
+          });
+          break;
+      case 20:
+        /**
+         *   change desc text color
+         */
+        await page.goto("https://www.oppo.com/in/");
+        await page.evaluate(()=>{
+          const desc_ = document.querySelectorAll(".desc");
+          desc_.forEach((item)=>{
+              item.style.color= "orange";
+          });
+        });
+       break;
+      default:
+        console.log("Check the readme to choose appropriate choice");
+        await browser.close();
     }
       // await browser.close();
   })();
