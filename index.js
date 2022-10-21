@@ -145,7 +145,50 @@ choise = Number(choise);
                 const form_element = document.querySelector('[role="search"]');
                 search_bar.value = "events"
                 form_element.submit();
-              })
+              });
+              break;
+        case 8:
+          /**
+           * Remove alternative languages from the list
+           */
+              await page.goto("https://www.google.com/");
+              await page.evaluate(()=>{
+                const divElements = document.getElementById("SIvCob");
+                divElements.remove();
+              });
+              break;
+        case 9:
+          /**
+           * Change the heading text color and Font  
+           */
+          await page.goto("https://www.codewars.com/");
+          await page.evaluate(()=>{
+            const heading = document.querySelector('.display-heading-1');
+            heading.setAttribute("style", "color:red; font-family:monospace");
+          });
+          break;
+        case 10:
+          /**
+           * Target the button and change background colour on mouseover
+           * freecodecamp.org
+           */
+          await page.goto("https://www.freecodecamp.org/");
+          await page.waitForSelector('[data-test-label="landing-big-cta"]');
+          await page.evaluate(()=>{
+            const startButton = document.querySelector('[data-test-label="landing-big-cta"]');
+            if(!startButton){
+              alert("can not target the text element");
+              return null;
+            }
+            const button_text = startButton.querySelector(".login-btn-text");
+            startButton.addEventListener("mouseover", ()=>{
+              button_text.setAttribute("style", "background-color:red");
+            });
+            startButton.addEventListener("mouseout", ()=>{
+              button_text.removeAttribute("style");
+            });
+          });
+          break;
     }
       // await browser.close();
   })();
