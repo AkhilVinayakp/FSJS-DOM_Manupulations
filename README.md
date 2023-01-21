@@ -1,5 +1,5 @@
 # JS-DOM_Manupulations
- codes for manupulating DOM
+ codes for manupulating DOM. All the operations listed below is implemented inside index.js file. 
 
 ## Install
 - clone repository and run `npm install`
